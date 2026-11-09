@@ -7,4 +7,3 @@ Maintainer: nailong
 Author: nailong
 Section: Tweaks
 Depends: firmware (>= 15.0), mobilesubstrate
-Installed-Size: 512
