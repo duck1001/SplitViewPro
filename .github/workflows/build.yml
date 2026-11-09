@@ -13,12 +13,8 @@ concurrency:
 
 jobs:
   build:
-    name: Theos (${{ matrix.scheme }})
+    name: Build deb (roothide + rootless)
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        scheme: [ roothide, rootless ]
 
     steps:
       - name: Checkout
@@ -27,7 +23,13 @@ jobs:
       - name: Install roothide/theos
         run: |
           set -e
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
+          for attempt in 1 2 3 4 5; do
+            echo "Theos install attempt $attempt ..."
+            if bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"; then
+              break
+            fi
+            sleep 20
+          done
           echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
 
       - name: Verify toolchain
@@ -38,19 +40,33 @@ jobs:
           xcodebuild -version
           clang --version
 
-      - name: Build package
+      - name: Build roothide package
         env:
-          THEOS_PACKAGE_SCHEME: ${{ matrix.scheme }}
+          THEOS_PACKAGE_SCHEME: roothide
           BUILD_PREFS: 0
         run: |
           set -e
+          make clean || true
           make package FINALPACKAGE=1
-          ls -lh packages/
+          mkdir -p artifacts
+          cp packages/*.deb artifacts/ 2>/dev/null || true
+          ls -lh packages/ artifacts/
 
-      - name: Upload deb
+      - name: Build rootless package
+        env:
+          THEOS_PACKAGE_SCHEME: rootless
+          BUILD_PREFS: 0
+        run: |
+          set -e
+          make clean || true
+          make package FINALPACKAGE=1
+          cp packages/*.deb artifacts/ 2>/dev/null || true
+          ls -lh packages/ artifacts/
+
+      - name: Upload debs
         uses: actions/upload-artifact@v4
         with:
-          name: SplitViewPro-${{ matrix.scheme }}-deb
-          path: packages/*.deb
+          name: SplitViewPro-debs
+          path: artifacts/*.deb
           if-no-files-found: error
           retention-days: 30

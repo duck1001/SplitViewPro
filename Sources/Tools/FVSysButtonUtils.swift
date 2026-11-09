@@ -251,8 +251,7 @@ public final class FVSysButtonUtils {
     // MARK: - 系统级动作
 
     private func killAllApps() {
-        // 原版：/usr/bin/killall + SpringBoard 的清理接口
-        _ = system("killall -9 -m SpringBoard 2>/dev/null")
+        // 清理后台：走 SBMainWorkspace 的 _removeAppLayout:forReason:
         // 更正确：走 SBMainWorkspace 的 _removeAppLayout:forReason:
         if let cls = NSClassFromString("SBMainWorkspace") as? NSObject.Type,
            let any = (cls as AnyObject).perform(NSSelectorFromString("sharedInstance")),
@@ -265,7 +264,8 @@ public final class FVSysButtonUtils {
     }
 
     private func respring() {
-        _ = system("killall -9 SpringBoard 2>/dev/null")
+        // 直接杀死 SpringBoard，launchd 会自动拉起它（respring）
+        kill(getpid(), SIGKILL)
     }
 
     private func powerSleep() {
