@@ -45,7 +45,7 @@ jobs:
       - name: Build roothide package
         env:
           THEOS_PACKAGE_SCHEME: roothide
-          BUILD_PREFS: 0
+          BUILD_PREFS: 1
         run: |
           set -e
           make clean || true
@@ -57,7 +57,7 @@ jobs:
       - name: Build rootless package
         env:
           THEOS_PACKAGE_SCHEME: rootless
-          BUILD_PREFS: 0
+          BUILD_PREFS: 1
         run: |
           set -e
           make clean || true
