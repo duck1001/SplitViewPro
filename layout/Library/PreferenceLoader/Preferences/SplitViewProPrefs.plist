@@ -9,7 +9,7 @@
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>FVPrefsRootListController</string>
+		<string>SplitViewProPrefsRootListController</string>
 		<key>icon</key>
 		<string>rectangle.split.2x1</string>
 		<key>label</key>

@@ -31,14 +31,7 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 BUILD_PREFS ?= 1
 ifeq ($(BUILD_PREFS),1)
 BUNDLE_NAME = SplitViewProPrefs
-SplitViewProPrefs_FILES = $(shell find prefs -type f -name '*.swift') \
-	Sources/Prefs/FVPrefsKeys.swift \
-	Sources/Prefs/FVPrefsStore.swift \
-	Sources/Support/FVLog.swift \
-	Sources/Support/FVAppHelper.swift \
-	Sources/Core/FVFileManager.swift \
-	Sources/Tools/FVToolAction.swift
-SplitViewProPrefs_SWIFTFLAGS = -I$(THEOS_PROJECT_DIR)/Sources -swift-version 5
+SplitViewProPrefs_FILES = $(shell find prefs-objc -type f -name '*.m')
 SplitViewProPrefs_FRAMEWORKS = UIKit Foundation
 SplitViewProPrefs_PRIVATE_FRAMEWORKS = Preferences
 SplitViewProPrefs_CFLAGS = -fobjc-arc
