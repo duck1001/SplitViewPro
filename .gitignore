@@ -4,5 +4,4 @@ obj/
 .DS_Store
 *.deb
 *.dylib
-*.bundle
 .layout/
