@@ -1,0 +1,56 @@
+name: Build Split View Pro deb
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Theos (${{ matrix.scheme }})
+    runs-on: macos-13
+    strategy:
+      fail-fast: false
+      matrix:
+        scheme: [ roothide, rootless ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install roothide/theos
+        run: |
+          set -e
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
+          echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: Verify toolchain
+        run: |
+          set -e
+          echo "THEOS=$THEOS"
+          ls -la "$THEOS" | head
+          xcodebuild -version
+          clang --version
+
+      - name: Build package
+        env:
+          THEOS_PACKAGE_SCHEME: ${{ matrix.scheme }}
+          BUILD_PREFS: 0
+        run: |
+          set -e
+          make package FINALPACKAGE=1
+          ls -lh packages/
+
+      - name: Upload deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: SplitViewPro-${{ matrix.scheme }}-deb
+          path: packages/*.deb
+          if-no-files-found: error
+          retention-days: 30

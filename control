@@ -1,0 +1,10 @@
+Package: com.nailong.split
+Name: Split View Pro
+Version: 1.0.0
+Architecture: iphoneos-arm64e
+Description: iOS 15–16 arm64e 分屏 / 浮窗插件（RootHide 原生）
+Maintainer: nailong
+Author: nailong
+Section: Tweaks
+Depends: firmware (>= 15.0), mobilesubstrate
+Installed-Size: 512
