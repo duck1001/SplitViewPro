@@ -47,7 +47,7 @@ public final class FVBadgeView: UIView {
 // MARK: - FVLoadingView（UIActivityIndicatorView）
 
 public final class FVLoadingView: UIActivityIndicatorView {
-    public init(style: UIActivityIndicatorView.Style = .medium) {
+    public override init(style: UIActivityIndicatorView.Style) {
         super.init(style: style)
         hidesWhenStopped = true                    // 证据：setHidesWhenStopped
         color = .systemBlue

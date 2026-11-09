@@ -47,7 +47,7 @@ public final class FVIOEvent {
 
     public func start() {
         guard !isRunning else { return }
-        let ok = hid.start(withHandler: { [weak self] phase, point, index in
+        let ok = hid.start(handler: { [weak self] phase, point, index in
             guard let self else { return }
             self.lastTouchObjPoint[index] = point
             self.abs_x = point.x

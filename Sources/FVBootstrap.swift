@@ -111,7 +111,15 @@ public final class FVAmbient {
         NotificationCenter.default.addObserver(
             forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main
         ) { [weak self] _ in
-            FVScreenUtils.shared.updateInterface(orientation: UIDevice.current.orientation)
+            let device = UIDevice.current.orientation
+            let interface: UIInterfaceOrientation
+            switch device {
+            case .landscapeLeft:  interface = .landscapeLeft
+            case .landscapeRight: interface = .landscapeRight
+            case .portraitUpsideDown: interface = .portraitUpsideDown
+            default:              interface = .portrait
+            }
+            FVScreenUtils.shared.updateInterface(orientation: interface)
             self?.relayoutForRotation()
         }
     }

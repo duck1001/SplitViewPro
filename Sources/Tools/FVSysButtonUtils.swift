@@ -252,10 +252,7 @@ public final class FVSysButtonUtils {
 
     private func killAllApps() {
         // 原版：/usr/bin/killall + SpringBoard 的清理接口
-        let p = Process()
-        p.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
-        p.arguments = ["-9", "-m", "SpringBoard"]   // 只作示例；真实清理走 SBMainWorkspace
-        try? p.run()
+        _ = system("killall -9 -m SpringBoard 2>/dev/null")
         // 更正确：走 SBMainWorkspace 的 _removeAppLayout:forReason:
         if let cls = NSClassFromString("SBMainWorkspace") as? NSObject.Type,
            let any = (cls as AnyObject).perform(NSSelectorFromString("sharedInstance")),
@@ -268,10 +265,7 @@ public final class FVSysButtonUtils {
     }
 
     private func respring() {
-        let p = Process()
-        p.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
-        p.arguments = ["-9", "SpringBoard"]
-        try? p.run()
+        _ = system("killall -9 SpringBoard 2>/dev/null")
     }
 
     private func powerSleep() {
