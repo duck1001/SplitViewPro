@@ -32,7 +32,7 @@ public final class FVArcLayout: UICollectionViewLayout {
         for i in 0..<n {
             let theta = startAngle + CGFloat(i) * step
             let attr = UICollectionViewLayoutAttributes(
-                forCellWithIndexPath: IndexPath(item: i, section: 0))
+                forCellWith: IndexPath(item: i, section: 0))
             attr.size = itemSize
             // 原版调用 __sincos_stret；Swift 里直接用 sin/cos 等价（编译器会优化成同一条指令）
             let sf = sin(theta), cf = cos(theta)

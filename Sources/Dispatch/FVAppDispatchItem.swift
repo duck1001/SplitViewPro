@@ -90,6 +90,11 @@ public final class FVAppDispatchItem: UIView, UIGestureRecognizerDelegate {
         installGestures()
     }
 
+    /// 关闭卡片时释放 scene 容器（对应 FVAppDispatchView.close 的 item.reset()）
+    public func reset() {
+        hostingView.reset()
+    }
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         hostingView.frame = bounds

@@ -71,6 +71,7 @@ extension Double {
 }
 
 public final class FVSysIconView: UIImageView {
+    public convenience init() { self.init(frame: .zero) }
     public override init(frame: CGRect) {
         super.init(frame: frame)
         contentMode = .scaleAspectFit

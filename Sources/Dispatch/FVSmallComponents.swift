@@ -56,7 +56,7 @@ public final class FVLoadingView: UIActivityIndicatorView {
         super.init(frame: frame)
         hidesWhenStopped = true
     }
-    public required init?(coder: NSCoder) { super.init(coder: coder) }
+    public required init(coder: NSCoder) { super.init(coder: coder) }
 }
 
 // MARK: - FVButton（UIButton）
@@ -118,7 +118,7 @@ public final class FVBottomToolBar: UIStackView {
         alignment = .center
         spacing = 6
     }
-    public required init?(coder: NSCoder) { super.init(coder: coder) }
+    public required init(coder: NSCoder) { super.init(coder: coder) }
 
     public func setItems(_ symbols: [String]) {
         arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -151,7 +151,7 @@ public final class FVBottomSideBar: UIStackView {
         axis = .horizontal
         distribution = .fillEqually
     }
-    public required init?(coder: NSCoder) { super.init(coder: coder) }
+    public required init(coder: NSCoder) { super.init(coder: coder) }
 
     public func setApps(_ bundleIdentifiers: [String]) {
         ids = bundleIdentifiers
@@ -171,6 +171,16 @@ public final class FVBottomSideBar: UIStackView {
         FVFeedback.shared.impact(.light)
         onTap?(ids[b.tag])
     }
+}
+
+// MARK: - FVBottomGridView
+
+public final class FVBottomGridView: UIView {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+    }
+    public required init?(coder: NSCoder) { super.init(coder: coder) }
 }
 
 // MARK: - FVBottomView（6664 字节）
