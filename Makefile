@@ -33,8 +33,8 @@ ifeq ($(BUILD_PREFS),1)
 BUNDLE_NAME = SplitViewProPrefs
 SplitViewProPrefs_FILES = $(shell find prefs-objc -type f -name '*.m')
 SplitViewProPrefs_FRAMEWORKS = UIKit Foundation
-SplitViewProPrefs_PRIVATE_FRAMEWORKS = Preferences
 SplitViewProPrefs_CFLAGS = -fobjc-arc
+SplitViewProPrefs_LDFLAGS = -undefined dynamic_lookup
 SplitViewProPrefs_INSTALL_PATH = /Library/PreferenceBundles
 include $(THEOS_MAKE_PATH)/bundle.mk
 endif
