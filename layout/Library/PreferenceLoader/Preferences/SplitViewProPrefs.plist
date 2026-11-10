@@ -11,7 +11,9 @@
 		<key>detail</key>
 		<string>SplitViewProPrefsRootListController</string>
 		<key>icon</key>
-		<string>rectangle.split.2x1</string>
+		<string>icon.png</string>
+		<key>isController</key>
+		<true/>
 		<key>label</key>
 		<string>Split View Pro</string>
 	</dict>
