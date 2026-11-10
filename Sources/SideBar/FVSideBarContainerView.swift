@@ -34,7 +34,9 @@ public final class FVSideBarContainerView: FVDisabledTaskScreenView, UIGestureRe
     private func setup() {
         let screen = FVScreenUtils.shared.mainBounds
         let store = FVPrefsStore.shared
-        let width = CGFloat(store.double(FVKey.sideBarWidth))
+        // 默认值 12.0 在逆向包里只是历史值；直接当 pt 用会窄到看不见。
+        // 这里夹到 260pt 起步，保证侧边栏一拉出来就能点。
+        let width = max(260, CGFloat(store.double(FVKey.sideBarWidth)))
         let factor = FVScreenUtils.shared.currentInterface == 0
             ? CGFloat(store.double(FVKey.sideBarHeightVer))
             : CGFloat(store.double(FVKey.sideBarHeightHor))

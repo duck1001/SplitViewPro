@@ -147,7 +147,7 @@ public enum FVPrefsDefaults {
         // 侧边栏
         FVKey.sideViewItemCount: 2,
         FVKey.sideViewDisplayLocation: 0,
-        FVKey.sideBarWidth: 12.0,
+        FVKey.sideBarWidth: 300.0,
         FVKey.sideBarHeightVer: 0.5,
         FVKey.sideBarHeightHor: 0.5,
         FVKey.sideBarAppIconSize: 44.0,
