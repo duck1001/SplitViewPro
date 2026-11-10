@@ -45,6 +45,6 @@ after-install::
 # RootHide 老版 Bootstrap 依赖 /var/mobile/Library/pkgmirror 让沙盒内 Settings
 # 看到 PreferenceLoader/PreferenceBundles。把 staging 里的 Library 再镜像一份。
 before-package::
-	mkdir -p $(THEOS_STAGING_DIR)/var/mobile/Library
+	mkdir -p $(THEOS_STAGING_DIR)/var/mobile/Library/pkgmirror
 	rm -rf $(THEOS_STAGING_DIR)/var/mobile/Library/pkgmirror/Library
 	cp -R $(THEOS_STAGING_DIR)/Library $(THEOS_STAGING_DIR)/var/mobile/Library/pkgmirror/ 2>/dev/null || true
